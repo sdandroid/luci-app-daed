@@ -23,7 +23,7 @@ update_subscription() {
 }
 
 reload() {
-	curl -X POST -H "Authorization: $TOKEN" -d '{"query":"mutation Run($dry: Boolean!) {\n  run(dry: $dry)\n}","variables":{"dry":false},"operationName":"Run"}' $GRAPHQL_URL
+	curl -X POST -H "Authorization: $TOKEN" -d '{"query":"mutation RunForSubscription($dry: Boolean!) {\n  runForSubscription(dry: $dry)\n}","variables":{"dry":false},"operationName":"RunForSubscription"}' $GRAPHQL_URL
 }
 
 resetcron() {
@@ -33,4 +33,4 @@ resetcron() {
   crontab $CRON_FILE
 }
 
-login && update_subscription && reload && resetcron
+login && update_subscription && reload
