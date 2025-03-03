@@ -10,6 +10,7 @@ DAED_VERSION:=daed-44f1bbe
 WING_VERSION:=wing-3c9a01a
 CORE_VERSION:=core-3358741
 PKG_RELEASE:=1
+DAED_WEB_PKG_VERSION=0.9.0
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_PROTO:=git
@@ -22,7 +23,7 @@ PKG_LICENSE_FILES:=LICENSE wing/LICENSE
 PKG_MAINTAINER:=Tianling Shen <cnsztl@immortalwrt.org>
 
 PKG_BUILD_DIR=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)/wing
-PKG_BUILD_DEPENDS:=golang/host bpf-headers node/host
+PKG_BUILD_DEPENDS:=golang/host bpf-headers
 PKG_BUILD_PARALLEL:=1
 PKG_BUILD_FLAGS:=no-mips16
 
@@ -67,6 +68,16 @@ define Package/daed/conffiles
 /etc/config/daed
 endef
 
+WEB_FILE:=$(PKG_NAME)-web-$(DAED_WEB_PKG_VERSION).zip
+define Download/daed-web
+	URL:=https://github.com/daeuniverse/daed/releases/download/v$(DAED_WEB_PKG_VERSION)
+	URL_FILE:=web.zip
+	FILE:=$(WEB_FILE)
+	HASH:=74a591946e9d550beac329836d5bff832999703f2b72361f899971600b80b1f1
+endef
+
+
+
 define Build/Prepare
 	( \
 		$(TAR) --strip-components=1 -C $(PKG_BUILD_DIR)/../ -xzf $(DL_DIR)/$(PKG_NAME)-$(PKG_VERSION).tar.gz ; \
@@ -79,19 +90,14 @@ define Build/Prepare
 		pushd $(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)/wing ; \
 		go mod tidy ; \
 		popd ; \
-		pushd $(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION) ; \
-		npm install -g pnpm ; \
-		pnpm install ; \
-		pnpm build ; \
-		popd ; \
-		mkdir -p $(PKG_BUILD_DIR)/webrender/web ; \
-		cp -rf $(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)/dist/* $(PKG_BUILD_DIR)/webrender/web ; \
+		mkdir -p $(PKG_BUILD_DIR)/webrender ; \
+		unzip -q -d $(PKG_BUILD_DIR)/webrender/ $(DL_DIR)/$(WEB_FILE) ; \
 		find $(PKG_BUILD_DIR)/webrender/web -type f -size +4k ! -name "*.gz" ! -name "*.woff"  ! -name "*.woff2" -exec sh -c '\
 			gzip -9 -k "{}"; \
-			if [ "$$$$(stat -c %s {})" -lt "$$$$(stat -c %s {}.gz)" ]; then \
-				rm {}.gz; \
+			if [ "$$$$(stat -c %s "{}")" -lt "$$$$(stat -c %s "{}.gz")" ]; then \
+				rm "{}.gz"; \
 			else \
-				rm {}; \
+				rm "{}"; \
 			fi' \
 		";" ; \
 	)
