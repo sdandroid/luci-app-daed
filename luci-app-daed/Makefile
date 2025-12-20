@@ -1,11 +1,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-daed
-PKG_VERSION:=1.3
+PKG_VERSION:=1.4
 PKG_RELEASE:=1
 
 LUCI_TITLE:=LuCI Support for DAED
-LUCI_DEPENDS:=+daed +curl +libcron +zoneinfo-asia +luci-compat
+LUCI_DEPENDS:=+daed +zoneinfo-asia +luci-compat
 LUCI_PKGARCH:=all
 
 define Package/$(PKG_NAME)/conffiles
