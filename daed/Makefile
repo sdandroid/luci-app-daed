@@ -5,12 +5,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=daed
-PKG_VERSION:=2025.11.12
-DAED_VERSION:=daed-c3588a9
-WING_VERSION:=wing-53b1f4b
-CORE_VERSION:=core-7e67e31
+PKG_VERSION:=2025.12.20
+DAED_VERSION:=daed-b14dae8
+WING_VERSION:=wing-830caf9
+CORE_VERSION:=core-9be76f8
 PKG_RELEASE:=1
-DAED_WEB_PKG_VERSION=1.0.0
+DAED_WEB_PKG_VERSION=1.21.1
 WING_HASH_SHORT:=$(shell echo $(WING_VERSION) | cut -d- -f2)
 CORE_HASH_SHORT:=$(shell echo $(CORE_VERSION) | cut -d- -f2)
 PKG_RELEASE:=1
@@ -77,7 +77,7 @@ define Download/daed-web
 	URL:=https://github.com/daeuniverse/daed/releases/download/v$(DAED_WEB_PKG_VERSION)
 	URL_FILE:=web.zip
 	FILE:=$(WEB_FILE)
-	HASH:=293acce7c5013e180698bc5af899ead4e9feba9a30e39a00d59554a376a9f64d
+	HASH:=ffba0f8b5e9411ad0da10349dfaab2336922d47cd5effd81163ce4415b4d84d7
 endef
 
 
@@ -86,7 +86,7 @@ define Build/Prepare
 	( \
 		$(TAR) --strip-components=1 -C $(PKG_BUILD_DIR)/../ -xzf $(DL_DIR)/$(PKG_NAME)-$(PKG_VERSION).tar.gz ; \
 		rm -rf $(PKG_BUILD_DIR) && git clone https://github.com/sdandroid/dae-wing $(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)/wing && git -C $(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)/wing checkout $(WING_HASH_SHORT) ; \
-		rm -rf $(PKG_BUILD_DIR)/dae-core && git clone https://github.com/daeuniverse/dae $(PKG_BUILD_DIR)/dae-core && git -C $(PKG_BUILD_DIR)/dae-core checkout $(CORE_HASH_SHORT) ; \
+		rm -rf $(PKG_BUILD_DIR)/dae-core && git clone https://github.com/ddatsh/dae $(PKG_BUILD_DIR)/dae-core && git -C $(PKG_BUILD_DIR)/dae-core checkout $(CORE_HASH_SHORT) ; \
 		pushd $(PKG_BUILD_DIR)/dae-core ; \
 		git submodule update --init ; \
 		go get -u=patch ; \
