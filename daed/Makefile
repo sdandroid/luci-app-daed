@@ -10,7 +10,7 @@ DAED_VERSION:=daed-b14dae8
 WING_VERSION:=wing-9cfd9f9
 CORE_VERSION:=core-f93ce60
 PKG_RELEASE:=1
-DAED_WEB_PKG_VERSION=1.21.1
+DAED_WEB_PKG_VERSION=1.24.0
 WING_HASH_SHORT:=$(shell echo $(WING_VERSION) | cut -d- -f2)
 CORE_HASH_SHORT:=$(shell echo $(CORE_VERSION) | cut -d- -f2)
 PKG_RELEASE:=1
@@ -77,7 +77,7 @@ define Download/daed-web
 	URL:=https://github.com/daeuniverse/daed/releases/download/v$(DAED_WEB_PKG_VERSION)
 	URL_FILE:=web.zip
 	FILE:=$(WEB_FILE)
-	HASH:=ffba0f8b5e9411ad0da10349dfaab2336922d47cd5effd81163ce4415b4d84d7
+	HASH:=30378e7a988b842b5d174af5cb6475ff2074ad948d7d99dbcf2213e1d6e1f277
 endef
 
 
