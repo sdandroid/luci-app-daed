@@ -5,7 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=daed
-PKG_VERSION:=2026.01.24
+PKG_VERSION:=2026.03.11
 DAED_VERSION:=daed-b14dae8
 WING_VERSION:=wing-9cfd9f9
 CORE_VERSION:=core-f93ce60
