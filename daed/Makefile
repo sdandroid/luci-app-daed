@@ -77,7 +77,7 @@ define Download/daed-web
 	URL:=https://github.com/daeuniverse/daed/releases/download/v$(DAED_WEB_PKG_VERSION)
 	URL_FILE:=web.zip
 	FILE:=$(WEB_FILE)
-	HASH:=30378e7a988b842b5d174af5cb6475ff2074ad948d7d99dbcf2213e1d6e1f277
+	HASH:=b46874ddabc246af2e14c9230c7b15227d3c3cee5e56a1271d1932d25acd5f88
 endef
 
 
