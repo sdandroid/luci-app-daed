@@ -5,12 +5,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=daed
-PKG_VERSION:=2026.04.07
+PKG_VERSION:=2026.05.31
 DAED_VERSION:=daed-b14dae8
 WING_VERSION:=wing-fcd1d27
-CORE_VERSION:=core-f93ce60
+CORE_VERSION:=core-aaf3401
 PKG_RELEASE:=1
-DAED_WEB_PKG_VERSION=1.26.0
+DAED_WEB_PKG_VERSION=1.27.0
 WING_HASH_SHORT:=$(shell echo $(WING_VERSION) | cut -d- -f2)
 CORE_HASH_SHORT:=$(shell echo $(CORE_VERSION) | cut -d- -f2)
 PKG_RELEASE:=1
@@ -77,7 +77,7 @@ define Download/daed-web
 	URL:=https://github.com/daeuniverse/daed/releases/download/v$(DAED_WEB_PKG_VERSION)
 	URL_FILE:=web.zip
 	FILE:=$(WEB_FILE)
-	HASH:=b46874ddabc246af2e14c9230c7b15227d3c3cee5e56a1271d1932d25acd5f88
+	HASH:=da8755fb2cabfab392854e807e385b12d9e9842d6c8b5e347284d1ae0e582bfc
 endef
 
 
